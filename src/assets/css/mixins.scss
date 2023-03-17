@@ -1,0 +1,32 @@
+// 文本样式
+@mixin fontStyle($size, $weight, $lineHeight, $opacity: 1) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $lineHeight;
+  opacity: $opacity;
+}
+
+// border,边框使用vant内置样式https://vant-contrib.gitee.io/vant/v4/#/zh-CN/style
+
+// 多行文本或单行文本显示,vant内置样式不兼容
+@mixin textEllipsis($num: 1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $num;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+
+//适配iphone安全距离
+//env函数后续将取代constant函数
+//safe-area-inset-left
+//safe-area-inset-right
+//safe-area-inset-top
+//safe-area-inset-bottom
+@mixin fixedBottomSafeBtn($margin: 16px) {
+  width: calc(100% - $margin * 2);
+  margin: $margin;
+  margin-bottom: calc($margin + constant(safe-area-inset-bottom));
+  margin-bottom: calc($margin + env(safe-area-inset-bottom));
+}
