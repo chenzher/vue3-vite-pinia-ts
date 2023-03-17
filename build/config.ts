@@ -42,7 +42,6 @@ export const needVconsole = false; //是否需要vconsole,开启时除production
 
 export const enableVantManualChunks = false; //开启后即可将vant包独立提取出来
 export const enableLodashManualChunks = false; //开启后即可将lodash-es包独立提取出来
-export const enableElementManualChunks = false; //开启后即可将element-plus包独立提取出来
 
 export const server = {
   open: '/index/#/home',

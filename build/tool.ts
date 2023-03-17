@@ -5,7 +5,6 @@ import {
   needVconsole,
   enableVantManualChunks,
   enableLodashManualChunks,
-  enableElementManualChunks,
 } from './config';
 import glob from 'glob';
 
@@ -74,9 +73,6 @@ export const getManualChunks = (viteEnv: IEnv) => {
   }
   if (enableLodashManualChunks) {
     manualChunks.lodash = ['lodash-es'];
-  }
-  if (enableElementManualChunks) {
-    manualChunks.element = ['element-plus'];
   }
   if (needVconsole && viteEnv !== 'production') {
     manualChunks.vconsole = ['vconsole'];

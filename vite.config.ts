@@ -1,12 +1,9 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { resolve } from 'path';
-import AutoImport from 'unplugin-auto-import/vite';
+// import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import {
-  ElementPlusResolver,
-  VantResolver,
-} from 'unplugin-vue-components/resolvers';
+import { VantResolver } from 'unplugin-vue-components/resolvers';
 import postcssPxtorem from 'postcss-pxtorem';
 import postcssPresetEnv from 'postcss-preset-env';
 import legacy from '@vitejs/plugin-legacy';
@@ -24,11 +21,9 @@ export default defineConfig(({ mode }) => {
 
   const plugins = [
     vue(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
+    // AutoImport({}),
     Components({
-      resolvers: [ElementPlusResolver(), VantResolver()],
+      resolvers: [VantResolver()],
       directoryAsNamespace: true,
     }),
     legacy({
@@ -91,7 +86,7 @@ export default defineConfig(({ mode }) => {
     },
     //预构建优化
     optimizeDeps: {
-      include: ['lodash-es', 'vant', 'element-plus'],
+      include: ['lodash-es', 'vant'],
     },
     //代理
     server,
