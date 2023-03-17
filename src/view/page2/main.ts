@@ -7,16 +7,9 @@ import pinia from '@/store/index';
 import { Http } from 'nat-plus';
 import mitt from 'mitt';
 import { setupGlobDirectives } from '@/directives/index';
-import Vconsole from 'vconsole';
-import { needVconsole } from '../../../build/config';
+import { setVconsole } from '@/assets/js/setVconsole';
 
-const env = import.meta.env.VITE_ENV;
-if (needVconsole && env !== 'production') {
-  const vConsole = new Vconsole();
-  setTimeout(() => {
-    vConsole.setSwitchPosition(0, 100);
-  }, 0);
-}
+setVconsole();
 
 const app = createApp(App);
 app.config.globalProperties.$mitt = mitt();

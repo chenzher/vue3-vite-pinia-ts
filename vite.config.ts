@@ -14,8 +14,8 @@ import eslintPlugin from 'vite-plugin-eslint';
 import { visualizer } from 'rollup-plugin-visualizer';
 import mpaPlugin from 'vite-plugin-mpa-plus';
 import { server, globalSass, px2rem } from './build/config';
-import { getPages, getBase } from './build/tool';
-import type { IEnv } from './build/config';
+import { getPages, getBase, getManualChunks } from './build/tool';
+import type { IEnv } from './build/tool';
 
 export default defineConfig(({ mode }) => {
   // 根据当前工作目录中的 `mode` 加载 .env 文件
@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => {
   if (env.VITE_ENV !== 'development') {
     plugins.push(
       visualizer({
-        open: true,
+        open: false, //浏览器打开stats.html可手动查看
         gzipSize: true,
         brotliSize: true,
       })
@@ -76,26 +76,22 @@ export default defineConfig(({ mode }) => {
       },
     },
     root: 'src/view', //项目根路径
+    publicDir: '../../public', //相对于项目根路径root设置
     // 构建
     build: {
-      outDir: '../../dist', //相对于项目根路径root
+      outDir: '../../dist', //相对于项目根路径root设置
       assetsDir: 'assets',
       assetsInlineLimit: 10240, //小于10Kb的资源内联为base64编码
       // target: ['esnext'], //已被legacy插件覆盖
       rollupOptions: {
         output: {
-          manualChunks: {
-            lodash: ['lodash-es'],
-            vant: ['vant'],
-            // element: ['element-plus'],
-            vconsole: ['vconsole'],
-          },
+          manualChunks: getManualChunks(env.VITE_ENV as IEnv),
         },
       },
     },
     //预构建优化
     optimizeDeps: {
-      include: ['lodash-es', 'vant'],
+      include: ['lodash-es', 'vant', 'element-plus'],
     },
     //代理
     server,

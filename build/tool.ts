@@ -1,6 +1,21 @@
-import { envConfig, staticUrl, isFile } from './config';
-import type { IEnv } from './config';
+import {
+  envConfig,
+  staticUrl,
+  isFile,
+  needVconsole,
+  enableVantManualChunks,
+  enableLodashManualChunks,
+  enableElementManualChunks,
+} from './config';
 import glob from 'glob';
+
+export type IEnv =
+  | 'stable'
+  | 'dev'
+  | 'ctest'
+  | 'pre'
+  | 'production'
+  | 'development';
 
 export const getEnvConfig = (viteEnv: IEnv) => {
   return envConfig[viteEnv as IEnv];
@@ -47,4 +62,24 @@ export const getPages = (viteEnv: IEnv) => {
   });
   console.log('pages===', pages);
   return pages;
+};
+
+interface IManualChunks {
+  [key: string]: string[];
+}
+export const getManualChunks = (viteEnv: IEnv) => {
+  const manualChunks: IManualChunks = {};
+  if (enableVantManualChunks) {
+    manualChunks.vant = ['vant'];
+  }
+  if (enableLodashManualChunks) {
+    manualChunks.lodash = ['lodash-es'];
+  }
+  if (enableElementManualChunks) {
+    manualChunks.element = ['element-plus'];
+  }
+  if (needVconsole && viteEnv !== 'production') {
+    manualChunks.vconsole = ['vconsole'];
+  }
+  return manualChunks;
 };
