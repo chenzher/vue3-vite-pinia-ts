@@ -72,6 +72,10 @@ export default defineConfig(({ mode }) => {
     },
     root: 'src/view', //项目根路径
     publicDir: '../../public', //相对于项目根路径root设置
+    define: {
+      __APP_VERSION__: '1.0.0',
+      __APP_ENV: env.VITE_ENV,
+    },
     // 构建
     build: {
       outDir: '../../dist', //相对于项目根路径root设置
