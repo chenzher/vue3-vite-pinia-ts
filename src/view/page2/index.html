@@ -53,9 +53,14 @@
         }
       })(window, document);
     </script>
+    <script>
+      this.globalThis || (this.globalThis = this);
+    </script>
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="./main.ts"></script>
+    <script type="module" src="./main.ts">
+      this.globalThis || (this.globalThis = this);
+    </script>
   </body>
 </html>

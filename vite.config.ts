@@ -13,6 +13,7 @@ import mpaPlugin from 'vite-plugin-mpa-plus';
 import { server, globalSass, px2rem } from './build/config';
 import { getPages, getBase, getManualChunks } from './build/tool';
 import type { IEnv } from './build/tool';
+import esbuild from 'rollup-plugin-esbuild';
 
 export default defineConfig(({ mode }) => {
   // 根据当前工作目录中的 `mode` 加载 .env 文件
@@ -36,6 +37,15 @@ export default defineConfig(({ mode }) => {
     mpaPlugin({
       pages: getPages(env.VITE_ENV as IEnv),
     }),
+    {
+      ...esbuild({
+        target: 'chrome64',
+        include: /\.vue|.ts|.js$/,
+        loaders: {
+          '.vue': 'js',
+        },
+      }),
+    },
   ];
   // 打包分析
   if (env.VITE_ENV !== 'development') {

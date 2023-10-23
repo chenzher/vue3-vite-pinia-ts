@@ -44,8 +44,8 @@ export const enableVantManualChunks = false; //开启后即可将vant包独立�
 export const enableLodashManualChunks = false; //开启后即可将lodash-es包独立提取出来
 
 export const server = {
-  open: '/index/#/home',
-  // open: '/page2/#/home',//多页面开发
+  open: '/index.html/#/home',
+  // open: '/page2.html/#/home',//多页面开发
   proxy: {
     '/api': {
       target: 'https://data.tcy365.org:1441',

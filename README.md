@@ -21,4 +21,4 @@ VITE_ENV = production; // 标记当前环境，用于隔离不同环境的代码
 
 ## 调试
 
-1.npm serve 打开页面 http://localhost:5173/index/#/home 或多页时的 http://localhost:5173/page2/#/home
+1.npm serve 打开页面 http://localhost:5173/index.html/#/home 或多页时的 http://localhost:5173/page2.html/#/home
